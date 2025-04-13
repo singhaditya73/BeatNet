@@ -83,3 +83,22 @@ export async function POST(req: NextRequest) {
         );
     }
 }
+
+export async function GET(req: NextRequest) {
+    const creatorId = req.nextUrl.searchParams.get("creatorId");
+    
+    try {
+        const streams = await prismaClient.stream.findMany({
+            where: {
+                userId: creatorId
+            }
+        });
+        
+        return NextResponse.json(streams);
+    } catch (e) {
+        return NextResponse.json(
+            { message: "Error while fetching streams" },
+            { status: 500 }
+        );
+    }
+}
