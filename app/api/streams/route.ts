@@ -71,12 +71,13 @@ export async function POST(req: NextRequest) {
                 userId: data.creatorId,
                 url: data.url,
                 extractedId,
-                type
+                type:"Youtube"
             }
         });
 
         return NextResponse.json({ message: "Stream added successfully" });
     } catch (e) {
+        console.log(e)
         return NextResponse.json(
             { message: "Error while adding a stream" },
             { status: 411 }
