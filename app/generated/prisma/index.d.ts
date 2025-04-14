@@ -2236,6 +2236,9 @@ export namespace Prisma {
     type: $Enums.StreamType | null
     url: string | null
     extractedId: string | null
+    title: string | null
+    smallImg: string | null
+    bigImg: string | null
     active: boolean | null
     userId: string | null
   }
@@ -2245,6 +2248,9 @@ export namespace Prisma {
     type: $Enums.StreamType | null
     url: string | null
     extractedId: string | null
+    title: string | null
+    smallImg: string | null
+    bigImg: string | null
     active: boolean | null
     userId: string | null
   }
@@ -2254,6 +2260,9 @@ export namespace Prisma {
     type: number
     url: number
     extractedId: number
+    title: number
+    smallImg: number
+    bigImg: number
     active: number
     userId: number
     _all: number
@@ -2265,6 +2274,9 @@ export namespace Prisma {
     type?: true
     url?: true
     extractedId?: true
+    title?: true
+    smallImg?: true
+    bigImg?: true
     active?: true
     userId?: true
   }
@@ -2274,6 +2286,9 @@ export namespace Prisma {
     type?: true
     url?: true
     extractedId?: true
+    title?: true
+    smallImg?: true
+    bigImg?: true
     active?: true
     userId?: true
   }
@@ -2283,6 +2298,9 @@ export namespace Prisma {
     type?: true
     url?: true
     extractedId?: true
+    title?: true
+    smallImg?: true
+    bigImg?: true
     active?: true
     userId?: true
     _all?: true
@@ -2365,6 +2383,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title: string
+    smallImg: string
+    bigImg: string
     active: boolean
     userId: string
     _count: StreamCountAggregateOutputType | null
@@ -2391,6 +2412,9 @@ export namespace Prisma {
     type?: boolean
     url?: boolean
     extractedId?: boolean
+    title?: boolean
+    smallImg?: boolean
+    bigImg?: boolean
     active?: boolean
     userId?: boolean
     upvotes?: boolean | Stream$upvotesArgs<ExtArgs>
@@ -2403,6 +2427,9 @@ export namespace Prisma {
     type?: boolean
     url?: boolean
     extractedId?: boolean
+    title?: boolean
+    smallImg?: boolean
+    bigImg?: boolean
     active?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2413,6 +2440,9 @@ export namespace Prisma {
     type?: boolean
     url?: boolean
     extractedId?: boolean
+    title?: boolean
+    smallImg?: boolean
+    bigImg?: boolean
     active?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2423,11 +2453,14 @@ export namespace Prisma {
     type?: boolean
     url?: boolean
     extractedId?: boolean
+    title?: boolean
+    smallImg?: boolean
+    bigImg?: boolean
     active?: boolean
     userId?: boolean
   }
 
-  export type StreamOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "url" | "extractedId" | "active" | "userId", ExtArgs["result"]["stream"]>
+  export type StreamOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "url" | "extractedId" | "title" | "smallImg" | "bigImg" | "active" | "userId", ExtArgs["result"]["stream"]>
   export type StreamInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     upvotes?: boolean | Stream$upvotesArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2451,6 +2484,9 @@ export namespace Prisma {
       type: $Enums.StreamType
       url: string
       extractedId: string
+      title: string
+      smallImg: string
+      bigImg: string
       active: boolean
       userId: string
     }, ExtArgs["result"]["stream"]>
@@ -2882,6 +2918,9 @@ export namespace Prisma {
     readonly type: FieldRef<"Stream", 'StreamType'>
     readonly url: FieldRef<"Stream", 'String'>
     readonly extractedId: FieldRef<"Stream", 'String'>
+    readonly title: FieldRef<"Stream", 'String'>
+    readonly smallImg: FieldRef<"Stream", 'String'>
+    readonly bigImg: FieldRef<"Stream", 'String'>
     readonly active: FieldRef<"Stream", 'Boolean'>
     readonly userId: FieldRef<"Stream", 'String'>
   }
@@ -4390,6 +4429,9 @@ export namespace Prisma {
     type: 'type',
     url: 'url',
     extractedId: 'extractedId',
+    title: 'title',
+    smallImg: 'smallImg',
+    bigImg: 'bigImg',
     active: 'active',
     userId: 'userId'
   };
@@ -4557,6 +4599,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFilter<"Stream"> | $Enums.StreamType
     url?: StringFilter<"Stream"> | string
     extractedId?: StringFilter<"Stream"> | string
+    title?: StringFilter<"Stream"> | string
+    smallImg?: StringFilter<"Stream"> | string
+    bigImg?: StringFilter<"Stream"> | string
     active?: BoolFilter<"Stream"> | boolean
     userId?: StringFilter<"Stream"> | string
     upvotes?: UpvoteListRelationFilter
@@ -4568,6 +4613,9 @@ export namespace Prisma {
     type?: SortOrder
     url?: SortOrder
     extractedId?: SortOrder
+    title?: SortOrder
+    smallImg?: SortOrder
+    bigImg?: SortOrder
     active?: SortOrder
     userId?: SortOrder
     upvotes?: UpvoteOrderByRelationAggregateInput
@@ -4582,6 +4630,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFilter<"Stream"> | $Enums.StreamType
     url?: StringFilter<"Stream"> | string
     extractedId?: StringFilter<"Stream"> | string
+    title?: StringFilter<"Stream"> | string
+    smallImg?: StringFilter<"Stream"> | string
+    bigImg?: StringFilter<"Stream"> | string
     active?: BoolFilter<"Stream"> | boolean
     userId?: StringFilter<"Stream"> | string
     upvotes?: UpvoteListRelationFilter
@@ -4593,6 +4644,9 @@ export namespace Prisma {
     type?: SortOrder
     url?: SortOrder
     extractedId?: SortOrder
+    title?: SortOrder
+    smallImg?: SortOrder
+    bigImg?: SortOrder
     active?: SortOrder
     userId?: SortOrder
     _count?: StreamCountOrderByAggregateInput
@@ -4608,6 +4662,9 @@ export namespace Prisma {
     type?: EnumStreamTypeWithAggregatesFilter<"Stream"> | $Enums.StreamType
     url?: StringWithAggregatesFilter<"Stream"> | string
     extractedId?: StringWithAggregatesFilter<"Stream"> | string
+    title?: StringWithAggregatesFilter<"Stream"> | string
+    smallImg?: StringWithAggregatesFilter<"Stream"> | string
+    bigImg?: StringWithAggregatesFilter<"Stream"> | string
     active?: BoolWithAggregatesFilter<"Stream"> | boolean
     userId?: StringWithAggregatesFilter<"Stream"> | string
   }
@@ -4716,6 +4773,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     upvotes?: UpvoteCreateNestedManyWithoutStreamInput
     user: UserCreateNestedOneWithoutStreamsInput
@@ -4726,6 +4786,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     userId: string
     upvotes?: UpvoteUncheckedCreateNestedManyWithoutStreamInput
@@ -4736,6 +4799,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     upvotes?: UpvoteUpdateManyWithoutStreamNestedInput
     user?: UserUpdateOneRequiredWithoutStreamsNestedInput
@@ -4746,6 +4812,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
     upvotes?: UpvoteUncheckedUpdateManyWithoutStreamNestedInput
@@ -4756,6 +4825,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     userId: string
   }
@@ -4765,6 +4837,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -4773,6 +4848,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -4965,6 +5043,9 @@ export namespace Prisma {
     type?: SortOrder
     url?: SortOrder
     extractedId?: SortOrder
+    title?: SortOrder
+    smallImg?: SortOrder
+    bigImg?: SortOrder
     active?: SortOrder
     userId?: SortOrder
   }
@@ -4974,6 +5055,9 @@ export namespace Prisma {
     type?: SortOrder
     url?: SortOrder
     extractedId?: SortOrder
+    title?: SortOrder
+    smallImg?: SortOrder
+    bigImg?: SortOrder
     active?: SortOrder
     userId?: SortOrder
   }
@@ -4983,6 +5067,9 @@ export namespace Prisma {
     type?: SortOrder
     url?: SortOrder
     extractedId?: SortOrder
+    title?: SortOrder
+    smallImg?: SortOrder
+    bigImg?: SortOrder
     active?: SortOrder
     userId?: SortOrder
   }
@@ -5357,6 +5444,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     upvotes?: UpvoteCreateNestedManyWithoutStreamInput
   }
@@ -5366,6 +5456,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     upvotes?: UpvoteUncheckedCreateNestedManyWithoutStreamInput
   }
@@ -5424,6 +5517,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFilter<"Stream"> | $Enums.StreamType
     url?: StringFilter<"Stream"> | string
     extractedId?: StringFilter<"Stream"> | string
+    title?: StringFilter<"Stream"> | string
+    smallImg?: StringFilter<"Stream"> | string
+    bigImg?: StringFilter<"Stream"> | string
     active?: BoolFilter<"Stream"> | boolean
     userId?: StringFilter<"Stream"> | string
   }
@@ -5557,6 +5653,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     user: UserCreateNestedOneWithoutStreamsInput
   }
@@ -5566,6 +5665,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
     userId: string
   }
@@ -5616,6 +5718,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutStreamsNestedInput
   }
@@ -5625,6 +5730,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -5634,6 +5742,9 @@ export namespace Prisma {
     type: $Enums.StreamType
     url: string
     extractedId: string
+    title?: string
+    smallImg?: string
+    bigImg?: string
     active?: boolean
   }
 
@@ -5647,6 +5758,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     upvotes?: UpvoteUpdateManyWithoutStreamNestedInput
   }
@@ -5656,6 +5770,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     upvotes?: UpvoteUncheckedUpdateManyWithoutStreamNestedInput
   }
@@ -5665,6 +5782,9 @@ export namespace Prisma {
     type?: EnumStreamTypeFieldUpdateOperationsInput | $Enums.StreamType
     url?: StringFieldUpdateOperationsInput | string
     extractedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    smallImg?: StringFieldUpdateOperationsInput | string
+    bigImg?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
   }
 
