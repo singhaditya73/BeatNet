@@ -21,7 +21,7 @@ export function Testimonial({ quote, author, role }: TestimonialProps) {
       <Card className="h-full transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 border-2 border-transparent hover:border-primary/20">
         <CardContent className="pt-6">
           <div className="relative">
-            <div className="absolute -left-2 -top-2 text-4xl text-primary opacity-50">"</div>
+            <div className="absolute -left-2 -top-2 text-4xl text-primary opacity-50">&ldquo;</div>
             <motion.blockquote className="relative z-10 pt-4" initial={{ opacity: 0.8 }} whileHover={{ opacity: 1 }}>
               {quote}
             </motion.blockquote>
