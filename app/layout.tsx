@@ -3,10 +3,9 @@ import type { ReactNode } from "react"
 import "@/app/globals.css"
 import type { Metadata } from "next"
 import { Mona_Sans as FontSans } from "next/font/google"
-import { Content as FontHeading } from "next/font/google" // Changed from Content to Inter
+import { Inter as FontHeading } from "next/font/google" // Using Inter which supports latin subset
 import { cn } from "@/lib/utils"
-import { ThemeProvider } from "./components/theme-provider"
-
+import { ThemeProvider } from "@/components/theme-provider"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -14,7 +13,7 @@ const fontSans = FontSans({
 })
 
 const fontHeading = FontHeading({
-  subsets: ["khmer"],
+  subsets: ["latin"],
   weight: ["700"],
   variable: "--font-heading",
 })

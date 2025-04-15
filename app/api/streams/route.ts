@@ -1,4 +1,4 @@
-import { prismaClient } from "@/app/lib/db";
+import { prismaClient } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

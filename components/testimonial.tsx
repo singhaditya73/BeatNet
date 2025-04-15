@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent, CardFooter } from "@/app/components/ui/card"
-import { Avatar, AvatarFallback } from "@app/components/ui/avatar"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 interface TestimonialProps {
   quote: string

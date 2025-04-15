@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { LogOut, Loader2 } from "lucide-react"
-import { Button } from "@/app/components/ui/button"
+import { Button } from "@/components/ui/button"
 
 interface LogoutButtonProps {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"

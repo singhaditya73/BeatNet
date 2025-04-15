@@ -1,4 +1,4 @@
-import { prismaClient } from "@/app/lib/db";
+import { prismaClient } from "@/lib/db";
 import { stream } from "hono/streaming";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";

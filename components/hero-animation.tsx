@@ -1,18 +1,16 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
 import { motion, useAnimation } from "framer-motion"
-import { Disc3, Music2, Headphones, Radio } from "lucide-react"
+import { Disc3, Music2, Headphones, Radio, Mic2, Volume2 } from "lucide-react"
+import { VinylRecord } from "../components/venyl-record"
+import { MusicPlayer } from "./music-player"
 
 export function HeroAnimation() {
   const containerRef = useRef<HTMLDivElement>(null)
   const controls = useAnimation()
-  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    // Mark that we're on the client side
-    setIsClient(true)
-    
     controls.start({
       scale: [0.9, 1],
       opacity: [0.5, 1],
@@ -20,59 +18,14 @@ export function HeroAnimation() {
     })
   }, [controls])
 
-  // Pre-generate animation paths for each element
-  // These are fixed paths that will be the same for both server and client
-  const animationPaths = [
-    { 
-      x: [100, -80, 60], 
-      y: [-70, 80, -50], 
-      rotate: [20, -30, 15] 
-    },
-    { 
-      x: [-120, 70, -90], 
-      y: [60, -100, 80], 
-      rotate: [-15, 40, -25] 
-    },
-    { 
-      x: [80, -60, 90], 
-      y: [-50, 70, -80], 
-      rotate: [30, -20, 35] 
-    },
-    { 
-      x: [-90, 100, -70], 
-      y: [90, -60, 50], 
-      rotate: [-35, 25, -15] 
-    },
-    { 
-      x: [70, -110, 85], 
-      y: [-75, 65, -95], 
-      rotate: [10, -45, 20] 
-    },
-    { 
-      x: [-60, 85, -75], 
-      y: [55, -85, 70], 
-      rotate: [-25, 15, -30] 
-    },
-    { 
-      x: [110, -65, 95], 
-      y: [-90, 75, -55], 
-      rotate: [45, -10, 30] 
-    },
-    { 
-      x: [-80, 95, -105], 
-      y: [85, -65, 75], 
-      rotate: [-20, 40, -15] 
-    },
-  ]
-
   const floatingElements = [
     { icon: <Music2 className="h-8 w-8 text-primary" />, delay: 0, duration: 15 },
     { icon: <Disc3 className="h-10 w-10 text-primary" />, delay: 1.5, duration: 18 },
     { icon: <Music2 className="h-6 w-6 text-primary" />, delay: 0.8, duration: 12 },
-    { icon: <Disc3 className="h-12 w-12 text-primary" />, delay: 2.2, duration: 20 },
+    { icon: <Mic2 className="h-12 w-12 text-primary" />, delay: 2.2, duration: 20 },
     { icon: <Headphones className="h-9 w-9 text-primary" />, delay: 1.2, duration: 16 },
     { icon: <Radio className="h-7 w-7 text-primary" />, delay: 0.5, duration: 14 },
-    { icon: <Music2 className="h-10 w-10 text-primary" />, delay: 3.0, duration: 17 },
+    { icon: <Volume2 className="h-10 w-10 text-primary" />, delay: 3.0, duration: 17 },
     { icon: <Headphones className="h-8 w-8 text-primary" />, delay: 2.5, duration: 19 },
   ]
 
@@ -84,47 +37,51 @@ export function HeroAnimation() {
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-blue-500/10 dark:from-purple-900/10 dark:via-pink-900/5 dark:to-blue-900/10 animate-gradient"></div>
 
+      {/* Wave animation */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 wave from-purple-500/20 via-pink-500/10 to-purple-500/20 dark:from-purple-900/20 dark:via-pink-900/10 dark:to-purple-900/20"></div>
+
       {/* Center glow */}
       <motion.div animate={controls} className="absolute inset-0 flex items-center justify-center">
         <div className="relative h-64 w-64 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 opacity-80 blur-2xl animate-pulse-slow"></div>
       </motion.div>
 
-      {/* Center icon */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      {/* Main content */}
+      <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center gap-8 p-8">
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="z-10 text-center hover-lift"
+          className="z-10"
         >
-          <motion.div
-            className="flex h-32 w-32 items-center justify-center rounded-full bg-background/90 shadow-lg border border-primary/20"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          >
-            <Music2 className="h-16 w-16 text-primary" />
-          </motion.div>
+          <VinylRecord />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="z-10"
+        >
+          <MusicPlayer />
         </motion.div>
       </div>
 
-      {/* Floating elements - only animate with real values on the client */}
+      {/* Floating elements */}
       {floatingElements.map((element, index) => (
         <motion.div
           key={index}
-          // Fixed initial state ensures server and client start with the same values
           initial={{
-            x: 0,
-            y: 0,
+            x: Math.random() * 400 - 200,
+            y: Math.random() * 400 - 200,
             opacity: 0,
-            rotate: 0,
+            rotate: Math.random() * 180 - 90,
           }}
-          // Only apply animations when on the client
-          animate={isClient ? {
-            x: animationPaths[index].x,
-            y: animationPaths[index].y,
-            opacity: [0, 1, 0],
-            rotate: animationPaths[index].rotate,
-          } : {}}
+          animate={{
+            x: [Math.random() * 200 - 100, Math.random() * 200 - 100, Math.random() * 200 - 100],
+            y: [Math.random() * 200 - 100, Math.random() * 200 - 100, Math.random() * 200 - 100],
+            opacity: [0.2, 1, 0.2],
+            rotate: [Math.random() * 90 - 45, Math.random() * 90 - 45, Math.random() * 90 - 45],
+          }}
           transition={{
             duration: element.duration,
             repeat: Number.POSITIVE_INFINITY,
@@ -133,10 +90,6 @@ export function HeroAnimation() {
             ease: "easeInOut",
           }}
           className="absolute left-1/2 top-1/2 z-0 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center"
-          style={{ 
-            // Ensure we use number values for all style properties
-            opacity: 0 
-          }}
         >
           <div className="p-2 bg-background/40 backdrop-blur-sm rounded-full shadow-lg">{element.icon}</div>
         </motion.div>

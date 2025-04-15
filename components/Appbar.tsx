@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
@@ -49,19 +49,19 @@ export function Appbar() {
           <ModeToggle />
 
           {session.data?.user ? (
-            <Button
-              variant="outline"
-              className="group"
-              onClick={() => signOut()}
-            >
-              Logout{" "}
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <Link href="/dashboard">
+              <Button variant="outline" className="group">
+                Dashboard{" "}
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           ) : (
-            <Button className="group" onClick={() => signIn()}>
-              Get Started{" "}
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <Link href="/signup">
+              <Button className="group">
+                Get Started{" "}
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
           )}
         </div>
       </div>

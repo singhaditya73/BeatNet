@@ -1,27 +1,29 @@
-
 import Link from "next/link"
-import { ArrowRight, Music, Users, Vote, Headphones } from "lucide-react"
-import { Button } from "../app/components/ui/button"
-import { Appbar } from "./components/Appbar"
-import { HeroAnimation } from "../app/components/hero-animation"
-import { FeatureCard } from "../app/components/feature-card"
-import { HowItWorks } from "../app/components/how-it-works"
-import { Testimonial } from "../app/components/testimonial"
+import { ArrowRight, Music, Users, Vote, Headphones, Radio, Mic2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Appbar } from "@components/Appbar"
+import { HeroAnimation } from "@/components/hero-animation"
+import { FeatureCard } from "@/components/feature-card"
+import { HowItWorks } from "@/components/how-it-works"
+import { Testimonial } from "@/components/testimonial"
+import { PlaylistPreview } from "@/components/playlist-preview"
+import { MusicVisualizer } from "@/components/music-visualizer"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-          
-           <Appbar />          
-         
+          <Appbar />
         </div>
       </header>
       <main className="flex-1">
-        <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-          <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-            <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+        <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-24">
+          <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center mx-auto">
+            <div className="flex items-center justify-center mb-5">
+              <MusicVisualizer />
+            </div>
+            <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl neon-text">
               Music Powered by{" "}
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
                 Democracy
@@ -32,7 +34,7 @@ export default function Home() {
               decide the playlist.
             </p>
             <div className="space-x-4">
-              <Button size="lg" asChild className="group hover-lift">
+              <Button size="lg" asChild className="group hover-lift glow">
                 <Link href="/signup">
                   Join Now <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
@@ -42,10 +44,18 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="container relative h-[300px] sm:h-[400px] md:h-[500px]">
+          <div className="container relative h-[400px] sm:h-[500px] md:h-[600px]">
             <HeroAnimation />
           </div>
         </section>
+
+        {/* Featured Playlist Section */}
+        <section className="container py-8 md:py-12">
+          <div className="mx-auto max-w-4xl">
+            <PlaylistPreview />
+          </div>
+        </section>
+
         <section
           id="features"
           className="container space-y-6 bg-slate-50 py-8 dark:bg-slate-900/30 md:py-12 lg:py-24 rounded-xl"
@@ -71,6 +81,21 @@ export default function Home() {
               icon={<Headphones className="h-10 w-10 text-primary" />}
               title="Synchronized Listening"
               description="Everyone hears the same track at the same time, creating a shared experience."
+            />
+            <FeatureCard
+              icon={<Radio className="h-10 w-10 text-primary" />}
+              title="Live DJ Sessions"
+              description="Take turns being the DJ and showcase your music taste to the community."
+            />
+            <FeatureCard
+              icon={<Mic2 className="h-10 w-10 text-primary" />}
+              title="Artist Discovery"
+              description="Discover new artists and genres through community recommendations."
+            />
+            <FeatureCard
+              icon={<Music className="h-10 w-10 text-primary" />}
+              title="Music Analytics"
+              description="Track your listening habits and see what's trending in your community."
             />
           </div>
         </section>
@@ -112,7 +137,7 @@ export default function Home() {
           </div>
         </section>
         <section className="container py-8 md:py-12 lg:py-24">
-          <div className="mx-auto max-w-[58rem] space-y-6 bg-slate-900 px-8 py-12 text-white dark:bg-slate-50 dark:text-slate-900 sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-24 lg:py-24 xl:px-32 xl:py-28 rounded-3xl hover-lift">
+          <div className="mx-auto max-w-[58rem] space-y-6 bg-slate-900 px-8 py-12 text-white dark:bg-slate-50 dark:text-slate-900 sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-24 lg:py-24 xl:px-32 xl:py-28 rounded-3xl hover-lift glow">
             <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-4xl text-center">
               Ready to join the musical democracy?
             </h2>
