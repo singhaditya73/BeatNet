@@ -36,7 +36,7 @@ export default function Home() {
             <div className="space-x-4">
               <Button size="lg" asChild className="group hover-lift glow">
                 <Link href="/signup">
-                  Join Now <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  Join Now <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="hover-lift">

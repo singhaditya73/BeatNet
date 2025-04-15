@@ -52,12 +52,12 @@ export function Appbar() {
             <Link href="/dashboard">
               <Button variant="outline" className="group">
                 Dashboard{" "}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 " />
               </Button>
             </Link>
           ) : (
             <Link href="/signup">
-              <Button className="group">
+              <Button className="group hover-lift glow">
                 Get Started{" "}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>

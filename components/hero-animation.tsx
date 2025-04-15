@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useMemo } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { Disc3, Music2, Headphones, Radio, Mic2, Volume2 } from "lucide-react"
 import { VinylRecord } from "../components/venyl-record"
@@ -18,16 +18,42 @@ export function HeroAnimation() {
     })
   }, [controls])
 
-  const floatingElements = [
-    { icon: <Music2 className="h-8 w-8 text-primary" />, delay: 0, duration: 15 },
-    { icon: <Disc3 className="h-10 w-10 text-primary" />, delay: 1.5, duration: 18 },
-    { icon: <Music2 className="h-6 w-6 text-primary" />, delay: 0.8, duration: 12 },
-    { icon: <Mic2 className="h-12 w-12 text-primary" />, delay: 2.2, duration: 20 },
-    { icon: <Headphones className="h-9 w-9 text-primary" />, delay: 1.2, duration: 16 },
-    { icon: <Radio className="h-7 w-7 text-primary" />, delay: 0.5, duration: 14 },
-    { icon: <Volume2 className="h-10 w-10 text-primary" />, delay: 3.0, duration: 17 },
-    { icon: <Headphones className="h-8 w-8 text-primary" />, delay: 2.5, duration: 19 },
-  ]
+  // Pre-generate all random values on component mount to avoid hydration mismatch
+  const animationData = useMemo(() => {
+    // Seed a fixed value for server-side rendering
+    const floatingElements = [
+      { icon: <Music2 className="h-8 w-8 text-primary" />, delay: 0, duration: 15 },
+      { icon: <Disc3 className="h-10 w-10 text-primary" />, delay: 1.5, duration: 18 },
+      { icon: <Music2 className="h-6 w-6 text-primary" />, delay: 0.8, duration: 12 },
+      { icon: <Mic2 className="h-12 w-12 text-primary" />, delay: 2.2, duration: 20 },
+      { icon: <Headphones className="h-9 w-9 text-primary" />, delay: 1.2, duration: 16 },
+      { icon: <Radio className="h-7 w-7 text-primary" />, delay: 0.5, duration: 14 },
+      { icon: <Volume2 className="h-10 w-10 text-primary" />, delay: 3.0, duration: 17 },
+      { icon: <Headphones className="h-8 w-8 text-primary" />, delay: 2.5, duration: 19 },
+    ]
+
+    return floatingElements.map((element, index) => {
+      // Pre-calculate all random values
+      const initialX = -100 + (index * 25) % 200
+      const initialY = -100 + (index * 30) % 200
+      const initialRotate = -45 + (index * 15) % 90
+      
+      // Create keyframes with consistent values
+      const xKeyframes = [-50 + index * 15, 50 - index * 10, -70 + index * 20]
+      const yKeyframes = [-60 + index * 20, 40 - index * 15, -50 + index * 25]
+      const rotateKeyframes = [-20 + index * 5, 30 - index * 8, -15 + index * 10]
+      
+      return {
+        ...element,
+        initialX,
+        initialY,
+        initialRotate,
+        xKeyframes,
+        yKeyframes,
+        rotateKeyframes,
+      }
+    })
+  }, [])
 
   return (
     <div
@@ -66,21 +92,21 @@ export function HeroAnimation() {
         </motion.div>
       </div>
 
-      {/* Floating elements */}
-      {floatingElements.map((element, index) => (
+      {/* Floating elements with pre-computed animation values */}
+      {animationData.map((element, index) => (
         <motion.div
           key={index}
           initial={{
-            x: Math.random() * 400 - 200,
-            y: Math.random() * 400 - 200,
+            x: element.initialX,
+            y: element.initialY,
             opacity: 0,
-            rotate: Math.random() * 180 - 90,
+            rotate: element.initialRotate,
           }}
           animate={{
-            x: [Math.random() * 200 - 100, Math.random() * 200 - 100, Math.random() * 200 - 100],
-            y: [Math.random() * 200 - 100, Math.random() * 200 - 100, Math.random() * 200 - 100],
+            x: element.xKeyframes,
+            y: element.yKeyframes,
             opacity: [0.2, 1, 0.2],
-            rotate: [Math.random() * 90 - 45, Math.random() * 90 - 45, Math.random() * 90 - 45],
+            rotate: element.rotateKeyframes,
           }}
           transition={{
             duration: element.duration,

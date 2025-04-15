@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
 import { ArrowLeft, Music, Loader2 } from "lucide-react"
 import { motion } from "framer-motion"
@@ -16,6 +16,19 @@ import { ModeToggle } from "@/components/mode-toggle"
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false)
+
+  // Pre-compute all random values to avoid hydration mismatch
+  const backgroundElements = useMemo(() => {
+    return Array.from({ length: 10 }).map((_, i) => ({
+      width: 50 + ((i * 37) % 300), // Deterministic but varied sizes
+      height: 50 + ((i * 43) % 300),
+      left: `${(i * 13) % 100}%`,
+      top: `${(i * 17) % 100}%`,
+      duration: 10 + ((i * 7) % 10),
+      delay: (i * 0.8) % 5,
+      key: i
+    }))
+  }, [])
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,17 +47,17 @@ export default function SignupPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-background/80 relative overflow-hidden">
-      {/* Animated background elements */}
+      {/* Animated background elements with pre-computed values */}
       <div className="absolute inset-0 -z-10">
-        {[...Array(10)].map((_, i) => (
+        {backgroundElements.map((element) => (
           <motion.div
-            key={i}
+            key={element.key}
             className="absolute rounded-full bg-primary/5 dark:bg-primary/10"
             style={{
-              width: Math.random() * 300 + 50,
-              height: Math.random() * 300 + 50,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              width: element.width,
+              height: element.height,
+              left: element.left,
+              top: element.top,
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{
@@ -52,9 +65,9 @@ export default function SignupPage() {
               opacity: [0.1, 0.2, 0.1],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: element.duration,
               repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 5,
+              delay: element.delay,
             }}
           />
         ))}
@@ -115,6 +128,7 @@ export default function SignupPage() {
                   />
                 </div>
                 <Button
+                   onClick={handleGoogleLogin}
                   type="submit"
                   className="w-full transition-all hover:shadow-md hover:shadow-primary/20"
                   disabled={isLoading}
