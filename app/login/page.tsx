@@ -1,12 +1,10 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useMemo } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, Music, Loader2 } from "lucide-react"
 import { motion } from "framer-motion"
-import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,50 +12,59 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator"
 import { ModeToggle } from "@/components/mode-toggle"
 
-export default function SignupPage() {
+export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
 
-  // Pre-compute all random values to avoid hydration mismatch
-  const backgroundElements = useMemo(() => {
-    return Array.from({ length: 10 }).map((_, i) => ({
-      width: 50 + ((i * 37) % 300), // Deterministic but varied sizes
-      height: 50 + ((i * 43) % 300),
-      left: `${(i * 13) % 100}%`,
-      top: `${(i * 17) % 100}%`,
-      duration: 10 + ((i * 7) % 10),
-      delay: (i * 0.8) % 5,
-      key: i
-    }))
-  }, [])
-
-  const handleSignup = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false)
+      // Store user info in localStorage for demo purposes
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: "Demo User",
+          email: "demo@example.com",
+        }),
+      )
+      // Redirect to home
+      window.location.href = "/"
     }, 1500)
   }
 
   const handleGoogleLogin = () => {
     setIsLoading(true)
-    // Use next-auth signIn method instead of the placeholder
-    signIn("google", { callbackUrl: "/" })
+    // Implement Google login logic here
+    setTimeout(() => {
+      setIsLoading(false)
+      // Store user info in localStorage for demo purposes
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: "Google User",
+          email: "google@example.com",
+        }),
+      )
+      // Redirect to home
+      window.location.href = "/"
+    }, 1500)
   }
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-background/80 relative overflow-hidden">
-      {/* Animated background elements with pre-computed values */}
+      {/* Animated background elements */}
       <div className="absolute inset-0 -z-10">
-        {backgroundElements.map((element) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
-            key={element.key}
+            key={i}
             className="absolute rounded-full bg-primary/5 dark:bg-primary/10"
             style={{
-              width: element.width,
-              height: element.height,
-              left: element.left,
-              top: element.top,
+              width: Math.random() * 300 + 50,
+              height: Math.random() * 300 + 50,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
             }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{
@@ -65,9 +72,9 @@ export default function SignupPage() {
               opacity: [0.1, 0.2, 0.1],
             }}
             transition={{
-              duration: element.duration,
+              duration: Math.random() * 10 + 10,
               repeat: Number.POSITIVE_INFINITY,
-              delay: element.delay,
+              delay: Math.random() * 5,
             }}
           />
         ))}
@@ -93,20 +100,11 @@ export default function SignupPage() {
               <div className="flex justify-center mb-2">
                 <Music className="h-10 w-10 text-primary" />
               </div>
-              <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
-              <CardDescription>Join BeatNet and start voting on your favorite music</CardDescription>
+              <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
+              <CardDescription>Log in to your BeatNet account</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <form onSubmit={handleSignup} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Enter your name"
-                    required
-                    className="transition-all border-muted-foreground/20 focus:border-primary"
-                  />
-                </div>
+              <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -118,17 +116,21 @@ export default function SignupPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password">Password</Label>
+                    <Link href="/forgot-password" className="text-xs text-primary hover:underline">
+                      Forgot password?
+                    </Link>
+                  </div>
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Create a password"
+                    placeholder="Enter your password"
                     required
                     className="transition-all border-muted-foreground/20 focus:border-primary"
                   />
                 </div>
                 <Button
-                   onClick={handleSignup}
                   type="submit"
                   className="w-full transition-all hover:shadow-md hover:shadow-primary/20"
                   disabled={isLoading}
@@ -139,7 +141,7 @@ export default function SignupPage() {
                       Please wait
                     </>
                   ) : (
-                    "Sign Up"
+                    "Log In"
                   )}
                 </Button>
               </form>
@@ -180,19 +182,9 @@ export default function SignupPage() {
             </CardContent>
             <CardFooter className="flex flex-col space-y-2">
               <div className="text-sm text-center text-muted-foreground">
-                Already have an account?{" "}
-                <Link href="/login" className="text-primary underline-offset-4 hover:underline">
-                  Log in
-                </Link>
-              </div>
-              <div className="text-xs text-center text-muted-foreground">
-                By signing up, you agree to our{" "}
-                <Link href="/terms" className="underline underline-offset-4 hover:text-primary">
-                  Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link href="/privacy" className="underline underline-offset-4 hover:text-primary">
-                  Privacy Policy
+                Don&apos;t have an account?{" "}
+                <Link href="/signup" className="text-primary underline-offset-4 hover:underline">
+                  Sign up
                 </Link>
               </div>
             </CardFooter>

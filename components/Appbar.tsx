@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import React from "react";
 import { ModeToggle } from "./mode-toggle";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { ArrowRight, Music } from "lucide-react";
 export function Appbar() {
   const session = useSession();
 
+  
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-6">
@@ -49,20 +50,19 @@ export function Appbar() {
           <ModeToggle />
 
           {session.data?.user ? (
-            <Link href="/dashboard">
-              <Button variant="outline" className="group">
-                Dashboard{" "}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 " />
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/signup">
-              <Button className="group hover-lift glow">
-                Get Started{" "}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          )}
+  <Button variant="outline" className="group" onClick={() => signOut()}>
+    logout
+    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 " />
+  </Button>
+) : (
+  <Link href="/signup">
+    <Button variant="outline" className="group">
+      Signin
+      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 " />
+    </Button>
+  </Link>
+)}
+
         </div>
       </div>
     </div>

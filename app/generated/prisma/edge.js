@@ -152,7 +152,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\ADITYA SINGH\\Desktop\\beatnet\\app\\generated\\prisma",
+      "value": "C:\\Users\\ADITYA SINGH\\Desktop\\projects\\beatnet\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -166,7 +166,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\ADITYA SINGH\\Desktop\\beatnet\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\ADITYA SINGH\\Desktop\\projects\\beatnet\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -180,12 +180,11 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://postgres:randompassword@localhost:5432/postgres"
       }
     }
   },

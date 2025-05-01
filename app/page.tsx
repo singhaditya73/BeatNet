@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Music, Users, Vote, Headphones, Radio, Mic2 } from "lucide-react"
+import { ArrowRight, Music, Users, Vote, Headphones, Radio, Mic2, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Appbar } from "@components/Appbar"
 import { HeroAnimation } from "@/components/hero-animation"
@@ -136,16 +136,16 @@ export default function Home() {
             />
           </div>
         </section>
-        <section className="container py-8 md:py-12 lg:py-24">
-          <div className="mx-auto max-w-[58rem] space-y-6 bg-slate-900 px-8 py-12 text-white dark:bg-slate-50 dark:text-slate-900 sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-24 lg:py-24 xl:px-32 xl:py-28 rounded-3xl hover-lift glow">
-            <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-4xl text-center">
+        <section className="container py-6 md:py-12 lg:py-24 px-4 sm:px-6">
+          <div className="mx-auto max-w-[58rem] space-y-6 bg-slate-900 px-6 py-10 text-white dark:bg-slate-50 dark:text-slate-900 sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-24 lg:py-24 xl:px-32 xl:py-28 rounded-2xl sm:rounded-3xl hover-lift glow">
+            <h2 className="font-heading text-2xl leading-[1.1] sm:text-3xl md:text-4xl text-center">
               Ready to join the musical democracy?
             </h2>
-            <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7 text-center dark:text-slate-700 text-slate-300">
+            <p className="leading-normal text-muted-foreground text-sm sm:text-base md:text-lg sm:leading-7 text-center dark:text-slate-700 text-slate-300">
               Sign up today and start voting on your favorite tracks. No credit card required.
             </p>
             <div className="flex justify-center">
-              <Button size="lg" className="mt-4 group" asChild>
+              <Button size="lg" className="mt-4 group w-full sm:w-auto" asChild>
                 <Link href="/signup">
                   Get Started <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
